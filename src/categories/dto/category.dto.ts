@@ -1,10 +1,4 @@
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCategoryDto {
   @IsNotEmpty()
@@ -20,10 +14,11 @@ export class CreateCategoryDto {
   isActive: boolean;
 
   @IsNotEmpty()
+  @IsString()
   image: string;
 }
 
-export class UpdateProductDto {
+export class UpdateCategoryDto {
   @IsOptional()
   @IsString()
   name?: string;
@@ -35,4 +30,8 @@ export class UpdateProductDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }

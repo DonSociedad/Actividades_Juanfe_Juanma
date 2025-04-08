@@ -22,6 +22,10 @@ export class CreateProductDto {
   @IsOptional()
   @IsBoolean()
   isActive: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  category: string;
 }
 
 export class UpdateProductDto {
@@ -40,4 +44,8 @@ export class UpdateProductDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @IsOptional()
+  @IsString()
+  category?: string;
 }

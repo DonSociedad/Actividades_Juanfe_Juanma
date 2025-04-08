@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './users/guards/jwt-auth.guard';
 import { RolesGuard } from './users/guards/roles.guard';
 import { AbilitiesModule } from './abilities/abilities.module';
 import { PoliciesGuard } from './users/guards/policies,guard';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PoliciesGuard } from './users/guards/policies,guard';
     }),
     UsersModule,
     ProductsModule,
+    CategoriesModule,
     AbilitiesModule,
   ],
   providers: [
