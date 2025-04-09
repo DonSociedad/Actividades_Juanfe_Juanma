@@ -24,9 +24,11 @@ export class CategoriesService {
   async create(
     createCategoryDto: CreateCategoryDto,
     userId: string,
+    string: string,
   ): Promise<Category> {
     const newCategory = new this.categoryModel({
       ...createCategoryDto,
+      image: string,
       createdBy: userId,
     });
     return newCategory.save();

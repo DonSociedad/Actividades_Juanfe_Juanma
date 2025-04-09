@@ -9,12 +9,15 @@ import {
   Request,
   UnauthorizedException,
   UseGuards,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { Public } from 'src/users/decorators/public.decorator';
 import { CreateCategoryDto, UpdateCategoryDto } from './dto/category.dto';
 import { RolesGuard } from 'src/users/guards/roles.guard';
 import { Roles } from 'src/users/decorators/roles.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('categories')
 export class CategoriesController {
@@ -26,6 +29,15 @@ export class CategoriesController {
     return this.categoriesService.findAll();
   }
 
+  @Post('Upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return {
+      message: 'Archivo subido con Exito yei',
+    };
+  }
+
   @Public()
   @Get(':id')
   findOne(@Param(':id') id: string) {
@@ -34,7 +46,12 @@ export class CategoriesController {
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto, @Request() req) {
-    return this.categoriesService.create(createCategoryDto, req.user.id);
+    const imagePath = `/uploads/${createCategoryDto.image}.jpg`;
+    return this.categoriesService.create(
+      createCategoryDto,
+      req.user.id,
+      imagePath,
+    );
   }
 
   @Put(':id')
